@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Corner Buttons with Image Popup</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #87CEEB; /* Light blue background */
+            height: 100vh;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: 1fr 1fr;
+            gap: 20px;
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: fit-content;
+            height: fit-content;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Positioning each container in the corners */
+        .container-top-left {
+            justify-self: start;
+            align-self: start;
+        }
+
+        .container-top-right {
+            justify-self: end;
+            align-self: start;
+        }
+
+        .container-bottom-left {
+            justify-self: start;
+            align-self: end;
+        }
+
+        .container-bottom-right {
+            justify-self: end;
+            align-self: end;
+        }
+
+        button {
+            margin: 10px;
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            background-color: #008CBA;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #005f73;
+        }
+
+        /* Fullscreen popup styling */
+        .popup {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8); /* Semi-transparent background */
+            justify-content: center;
+            align-items: center;
+        }
+
+        .popup img {
+            max-width: 90%;
+            max-height: 90%;
+            border-radius: 10px;
+        }
+
+        .popup.active {
+            display: flex;
+        }
+
+        /* Image styling in each container */
+        .container img {
+            max-width: 100px; /* Adjust size as needed */
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Container in the top-left corner -->
+    <div class="container container-top-left">
+        <div>
+            <h2>Click a Button</h2>
+            <img src="Screenshot 2024-09-07 2.10.05 PM.png" alt="Image 1"> <!-- Add image -->
+            <button onclick="showImage('image1.jpg')">Click me 1</button>
+            <button onclick="showImage('image2.jpg')">Click me 2</button>
+        </div>
+    </div>
+
+    <!-- Container in the top-right corner -->
+    <div class="container container-top-right">
+        <div>
+            <h2>Click a Button</h2>
+            <img src="Screenshot 2024-09-09 11.30.14 AM.png" alt="Image 2"> <!-- Add image -->
+            <button onclick="showImage('image3.jpg')">Click me 3</button>
+            <button onclick="showImage('image4.jpg')">Click me 4</button>
+        </div>
+    </div>
+
+    <!-- Container in the bottom-left corner -->
+    <div class="container container-bottom-left">
+        <div>
+            <h2>Click a Button</h2>
+            <img src="Screenshot 2024-09-09 11.30.21 AM.png" alt="Image 3"> <!-- Add image -->
+            <button onclick="showImage('image5.jpg')">Click me 5</button>
+            <button onclick="showImage('image6.jpg')">Click me 6</button>
+        </div>
+    </div>
+
+    <!-- Container in the bottom-right corner -->
+    <div class="container container-bottom-right">
+        <div>
+            <h2>Click a Button</h2>
+            <img src="Screenshot 2024-09-09 11.30.53 AM.png" alt="Image 4"> <!-- Add image -->
+            <button onclick="showImage('image7.jpg')">Click me 7</button>
+            <button onclick="showImage('image8.jpg')">Click me 8</button>
+        </div>
+    </div>
+
+    <!-- Fullscreen image popup -->
+    <div id="imagePopup" class="popup" onclick="hideImage()">
+        <img id="popupImage" src="" alt="Popup Image">
+    </div>
+
+    <script>
+        function showImage(imageUrl) {
+            var popup = document.getElementById('imagePopup');
+            var img = document.getElementById('popupImage');
+            img.src = imageUrl;  // Set the image source
+            popup.classList.add('active');  // Show the popup
+        }
+
+        function hideImage() {
+            var popup = document.getElementById('imagePopup');
+            popup.classList.remove('active');  // Hide the popup
+        }
+    </script>
+
+</body>
+</html>
