@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sound Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+            margin: 0;
+        }
+
+        .calculator {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .display {
+            width: 100%;
+            height: 60px;
+            margin-bottom: 20px;
+            text-align: right;
+            font-size: 24px;
+            padding: 10px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+
+        .buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 60px);
+            gap: 10px;
+        }
+
+        .buttons button {
+            width: 60px;
+            height: 60px;
+            font-size: 24px;
+            background-color: #76c7c0;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .buttons button:hover {
+            background-color: #5aa19b;
+        }
+
+        .buttons button:active {
+            background-color: #3d7470;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="calculator">
+        <div class="display" id="display">0</div>
+        <div class="buttons">
+            <button onclick="pressKey('1')">1</button>
+            <button onclick="pressKey('2')">2</button>
+            <button onclick="pressKey('3')">3</button>
+            <button onclick="pressKey('+')">+</button>
+            
+            <button onclick="pressKey('4')">4</button>
+            <button onclick="pressKey('5')">5</button>
+            <button onclick="pressKey('6')">6</button>
+            <button onclick="pressKey('-')">-</button>
+
+            <button onclick="pressKey('7')">7</button>
+            <button onclick="pressKey('8')">8</button>
+            <button onclick="pressKey('9')">9</button>
+            <button onclick="pressKey('*')">*</button>
+
+            <button onclick="pressKey('0')">0</button>
+            <button onclick="pressKey('.')">.</button>
+            <button onclick="calculate()">=</button>
+            <button onclick="pressKey('/')">/</button>
+
+            <button onclick="clearDisplay()" style="grid-column: span 4;">C</button>
+        </div>
+    </div>
+
+    <!-- Audio elements -->
+    <audio id="sound1" src="sound1.mp3"></audio>
+    <audio id="sound2" src="sound2.mp3"></audio>
+    <audio id="sound3" src="sound3.mp3"></audio>
+    <audio id="sound4" src="sound4.mp3"></audio>
+
+    <script>
+        let currentInput = '';
+        let sounds = ['sound1', 'sound2', 'sound3', 'sound4'];
+        let soundIndex = 0;
+
+        function pressKey(key) {
+            playSound();
+            if (currentInput === '0' && key !== '.') {
+                currentInput = key;
+            } else {
+                currentInput += key;
+            }
+            document.getElementById('display').innerText = currentInput;
+        }
+
+        function calculate() {
+            try {
+                currentInput = eval(currentInput).toString();
+            } catch (error) {
+                currentInput = 'Error';
+            }
+            document.getElementById('display').innerText = currentInput;
+        }
+
+        function clearDisplay() {
+            playSound();
+            currentInput = '0';
+            document.getElementById('display').innerText = currentInput;
+        }
+
+        function playSound() {
+            let sound = document.getElementById(sounds[soundIndex]);
+            sound.play();
+            soundIndex = (soundIndex + 1) % sounds.length;
+        }
+    </script>
+
+</body>
+</html>
